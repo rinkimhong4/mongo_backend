@@ -1,8 +1,24 @@
-const mongoose = require("mongoose");
+const express = require("express");
+const router = express.Router();
+const Brand = require("../db/brand");
 
-const brandSchema = new mongoose.Schema({
-  brand_id: { type: Number, required: true, unique: true },
-  brand_name: { type: String, required: true, maxlength: 100 },
+router.post("/", async (req, res) => {
+  try {
+    const brand = new Brand(req.body);
+    await brand.save();
+    res.status(201).json(brand);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
-module.exports = mongoose.model("Brand", brandSchema);
+router.get("/", async (req, res) => {
+  try {
+    const brands = await Brand.find();
+    res.json(brands);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+module.exports = router;
