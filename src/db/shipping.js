@@ -14,6 +14,9 @@ const shippingSchema = new mongoose.Schema({
     required: true,
   },
   estimated_delivery: { type: Date, required: true },
+  shipping_cost: { type: Number, required: true, min: 0 },
+  shipping_address: { type: String, required: true, maxlength: 255 },
+  created_at: { type: Date, default: Date.now },
 });
 
 const Shipping = mongoose.model("Shipping", shippingSchema, "shipping");

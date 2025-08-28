@@ -18,6 +18,9 @@ const paymentSchema = new mongoose.Schema({
   },
   amount: { type: Number, required: true, min: 0 },
   payment_date: { type: Date, required: true },
+  transaction_id: { type: String, required: true, unique: true },
+  currency: { type: String, required: true, default: "USD" },
+  created_at: { type: Date, default: Date.now },
 });
 
 const Payment = mongoose.model("Payment", paymentSchema, "payments");

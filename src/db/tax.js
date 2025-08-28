@@ -5,6 +5,9 @@ const taxSchema = new mongoose.Schema({
   tax_id: { type: Number, unique: true },
   tax_name: { type: String, required: true, maxlength: 100 },
   percentage: { type: Number, required: true, min: 0 },
+  country: { type: String, required: true },
+  is_active: { type: Boolean, default: true },
+  created_at: { type: Date, default: Date.now },
 });
 
 taxSchema.plugin(AutoIncrement, { inc_field: "tax_id" });

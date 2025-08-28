@@ -9,8 +9,12 @@ const productPromotionSchema = new mongoose.Schema({
   promo_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Promotion",
+    ref: "Promotion", // now properly linked
   },
+  effective_discount: { type: Number, required: true, min: 0, max: 100 },
+  start_date: { type: Date, required: true },
+  end_date: { type: Date, required: true },
+  created_at: { type: Date, default: Date.now },
 });
 
 const ProductPromotion = mongoose.model(
@@ -18,4 +22,5 @@ const ProductPromotion = mongoose.model(
   productPromotionSchema,
   "productPromotions"
 );
+
 module.exports = ProductPromotion;
